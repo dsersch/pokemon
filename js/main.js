@@ -32,20 +32,39 @@ function Pokemon(name, HP, speed, type, move1, move2, move3, front, back){
 
 // test trainer objects
 
-var trainers = {
-    Red: {
-        pickacu : new Pokemon('picachu', 150, 9, 'electric', thunderbolt, shock, slap, 
-        'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif'),
 
-        geodude : new Pokemon('geodude', 200, 3, 'rock', pound, rockThrow, smash,
-        'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif')
-        
-    },
-    Blue: {
-        geodude : new Pokemon('geodude', 200, 3, 'rock', pound, rockThrow, smash,
-        'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif'),
+Red = {
+    player: 0,
+    pickacu: new Pokemon('picachu', 150, 9, 'electric', thunderbolt, shock, slap, 
+    'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif'),
 
-        pickacu : new Pokemon('picachu', 150, 9, 'electric', thunderbolt, shock, slap, 
-        'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif')
+    geodude: new Pokemon('geodude', 200, 3, 'rock', pound, rockThrow, smash,
+    'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif')
+    
+}
+Blue = {
+    player: 1,
+    geodude: new Pokemon('geodude', 200, 3, 'rock', pound, rockThrow, smash,
+    'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif'),
+
+    pickacu: new Pokemon('picachu', 150, 9, 'electric', thunderbolt, shock, slap, 
+    'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif')
+}
+
+
+// set current pokemon for each trainer
+
+var player1 = Red.pickacu;
+var player2 = Blue.geodude;
+
+function setPlayerImage(trainer, poke) {
+    var imgage = poke.back
+    var $imgs = $('img')
+    if(trainer.player === 0) {
+        $imgs[trainer.player].setAttribute('src', poke.back)
+    } else {
+        $imgs[trainer.player].setAttribute('src', poke.front)
     }
 }
+setPlayerImage(Red, Red.pickacu)
+setPlayerImage(Blue, Blue.geodude)
