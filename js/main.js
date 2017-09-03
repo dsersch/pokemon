@@ -55,6 +55,8 @@ Blue = {
 var player1 = Red.pickacu;
 var player2 = Blue.geodude;
 
+// info functions
+
 function setImage(trainer, poke) {
     var $imgs = $('img');
     if(trainer.player === 0) {
@@ -67,7 +69,7 @@ function setHealt(trainer, poke) {
     var maxHealth = poke.HP;
     var currentHealth = poke.HP;
     var $health = $('.health');
-    $($health[trainer.player]).text(currentHealth + '/' + maxHealth)
+    $($health[trainer.player]).text('HP: ' + currentHealth + '/' + maxHealth)
 }
 
 function setMoves(trainer, poke) {
@@ -77,9 +79,13 @@ function setMoves(trainer, poke) {
         $($movesLists[trainer.player]).append($move);
     }
 }
-setImage(Red, Red.pickacu);
-setImage(Blue, Blue.geodude);
-setHealt(Red, Red.pickacu);
-setHealt(Blue, Blue.geodude);
-setMoves(Red, Red.pickacu);
-setMoves(Blue, Blue.geodude);
+
+function setPlayerInfo(trainer, poke) {
+    setImage(trainer, poke);
+    setHealt(trainer, poke);
+    setMoves(trainer, poke);
+}
+
+setPlayerInfo(Red, Red.pickacu);
+setPlayerInfo(Blue, Blue.geodude);
+
