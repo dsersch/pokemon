@@ -15,7 +15,7 @@ var shock = new Move('shock', 50, 5, 'electric', 'yellow')
 
 // pokemon constructor
 
-function Pokemon(name, HP, speed, type, move1, move2, move3){
+function Pokemon(name, HP, speed, type, move1, move2, move3, front, back){
     this.name = name;
     this.HP = HP;
     this.speed = speed;
@@ -23,8 +23,12 @@ function Pokemon(name, HP, speed, type, move1, move2, move3){
     this.move1 = move1;
     this.move2 = move2;
     this.move3 = move3;
+    this.front = front;
+    this.back =back;
 }
 
 // test pokemon object
 
-var pickacu = new Pokemon('picachu', 150, 9, 'electric', thunderbolt, shock, slap)
+var pickacu = new Pokemon('picachu', 150, 9, 'electric', thunderbolt, shock, slap, 
+'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif')
+

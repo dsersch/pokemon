@@ -1,3 +1,31 @@
 h1 {
     text-align: center;
 }
+#player1 {
+    width: 300px;
+    display: inline-block;
+}
+#player2 {
+    width: 300px;
+    float: right;
+    clear: left;
+    text-align: right;
+}
+.healthbar {
+    height: 20px;
+    background: yellowgreen;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+.moves {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-top: 0px;
+    text-align: center;
+}
+li {
+    height: 20px;
+    border: 2px solid black;
+    border-radius: 4px;
+    margin-top: 2px;
+}
