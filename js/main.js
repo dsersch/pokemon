@@ -23,9 +23,7 @@ function Pokemon(name, HP, speed, type, move1, move2, move3, front, back){
     this.HP = HP;
     this.speed = speed;
     this.type = type;
-    this.move1 = move1;
-    this.move2 = move2;
-    this.move3 = move3;
+    this.moves = [move1, move2, move3]
     this.front = front;
     this.back =back;
 }
@@ -57,14 +55,31 @@ Blue = {
 var player1 = Red.pickacu;
 var player2 = Blue.geodude;
 
-function setPlayerImage(trainer, poke) {
-    var imgage = poke.back
-    var $imgs = $('img')
+function setImage(trainer, poke) {
+    var $imgs = $('img');
     if(trainer.player === 0) {
-        $imgs[trainer.player].setAttribute('src', poke.back)
+        $imgs[trainer.player].setAttribute('src', poke.back);
     } else {
-        $imgs[trainer.player].setAttribute('src', poke.front)
+        $imgs[trainer.player].setAttribute('src', poke.front);
     }
 }
-setPlayerImage(Red, Red.pickacu)
-setPlayerImage(Blue, Blue.geodude)
+function setHealt(trainer, poke) {
+    var maxHealth = poke.HP;
+    var currentHealth = poke.HP;
+    var $health = $('.health');
+    $($health[trainer.player]).text(currentHealth + '/' + maxHealth)
+}
+
+function setMoves(trainer, poke) {
+    for(var i = 0; i < 3; i += 1) {
+        var $move = $('<li>').text(poke.moves[i].name).css("background", poke.moves[i].color);
+        var $movesLists = $('ul');
+        $($movesLists[trainer.player]).append($move);
+    }
+}
+setImage(Red, Red.pickacu);
+setImage(Blue, Blue.geodude);
+setHealt(Red, Red.pickacu);
+setHealt(Blue, Blue.geodude);
+setMoves(Red, Red.pickacu);
+setMoves(Blue, Blue.geodude);
