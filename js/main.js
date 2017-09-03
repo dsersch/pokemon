@@ -12,6 +12,9 @@ function Move(name, damage, pp, type, color){
 var thunderbolt = new Move('thunderbolt', 30, 25, 'electric', 'yellow');
 var slap = new Move('slap', 15, 40, 'nornmal', 'silver')
 var shock = new Move('shock', 50, 5, 'electric', 'yellow')
+var pound = new Move('pound', 15, 40, 'normal', 'silver')
+var rockThrow = new Move('rock throw', 30, 25, 'rock', 'slategray')
+var smash = new Move('smash', 50, 5, 'rock', 'slategray')
 
 // pokemon constructor
 
@@ -27,8 +30,22 @@ function Pokemon(name, HP, speed, type, move1, move2, move3, front, back){
     this.back =back;
 }
 
-// test pokemon object
+// test trainer objects
 
-var pickacu = new Pokemon('picachu', 150, 9, 'electric', thunderbolt, shock, slap, 
-'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif')
+var trainers = {
+    Red: {
+        pickacu : new Pokemon('picachu', 150, 9, 'electric', thunderbolt, shock, slap, 
+        'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif'),
 
+        geodude : new Pokemon('geodude', 200, 3, 'rock', pound, rockThrow, smash,
+        'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif')
+        
+    },
+    Blue: {
+        geodude : new Pokemon('geodude', 200, 3, 'rock', pound, rockThrow, smash,
+        'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif'),
+
+        pickacu : new Pokemon('picachu', 150, 9, 'electric', thunderbolt, shock, slap, 
+        'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif')
+    }
+}
