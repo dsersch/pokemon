@@ -100,6 +100,36 @@ var currentPlayer = Red;
 var enemy = Blue;
 var currentPokemon = Red.pickacu;
 var enemyPokemon = Blue.geodude;
+var $start = $('ul');
+$($start[1]).css('display', 'none');
+
+//swith turns function
+
+function switchTurns() {
+    if(currentPlayer === Red) {
+        var lastPlayer = currentPlayer;
+        var lastPoke = currentPokemon;
+        currentPlayer = enemy;
+        currentPokemon = enemyPokemon;
+        enemy = lastPlayer;
+        enemyPokemon = lastPoke;
+        var $movelist = $('ul');
+        $($movelist[0]).slideToggle(400, function() {
+            $($movelist[1]).slideToggle(400);
+        });
+    } else {
+        lastPlayer = currentPlayer;
+        lastPoke = currentPokemon;
+        currentPlayer = enemy;
+        currentPokemon = enemyPokemon;
+        enemy = lastPlayer;
+        enemyPokemon = lastPoke;
+        var $movelist = $('ul');
+        $($movelist[1]).slideToggle(400, function() {
+            $($movelist[0]).slideToggle(400);
+        });
+    }
+}
 
 // attack function
 
@@ -110,4 +140,5 @@ $('li').on('click', function() {
     //console.log(this.move.currentPP);
     //console.log(enemyPokemon.currentHP);
     setHealth(enemy, enemyPokemon);
+    switchTurns();
 })

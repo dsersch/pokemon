@@ -37,3 +37,6 @@ li {
 span {
     float: right;
 }
+.hidden {
+    display: none;
+}
