@@ -148,6 +148,13 @@ function switchPokemon(trainer, poke) {
     currentPokemon = poke;
 }
 
+function setPokeballs() {
+    for (var i = 0; i < 6; i += 1) {
+        var $ball = $('<li>').addClass('ball').html('<img src="https://s-media-cache-ak0.pinimg.com/236x/93/d9/10/93d910850bf76debe69a0ad7a5a76141--art-students-performing-arts.jpg">');
+        $('.pokeballs').append($ball);
+    }
+}
+setPokeballs()
 
 
 // attack function
