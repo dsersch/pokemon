@@ -166,9 +166,11 @@ setPokeballs(Blue, blueArray);
 //on click to change pokemon
 
 $('body').on('click', '.ball', function() {
-    console.log(this.pokemon)
-    console.log(this.trainer)
-    switchPokemon(this.trainer, this.pokemon)
+    if (currentPlayer === this.trainer) {
+        switchPokemon(this.trainer, this.pokemon)
+    } else {
+        alert("Not Your Turn")
+    }
 })
 
 
