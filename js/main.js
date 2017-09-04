@@ -39,8 +39,8 @@ Red = {
 
     geodude: new Pokemon('GEODUDE', 200, 200, 3, 'rock', pound, rockThrow, smash,
     'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif')
-    
 }
+var redArray = [Red.pickacu, Red.geodude]
 Blue = {
     player: 1,
     geodude: new Pokemon('GEODUDE', 200, 200, 3, 'rock', pound, rockThrow, smash,
@@ -49,7 +49,7 @@ Blue = {
     pickacu: new Pokemon('PICACHU', 150, 150, 9, 'electric', thunderbolt, shock, slap, 
     'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif')
 }
-
+var blueArray = [Blue.geodude, Blue.pickacu]
 // info functions
 
 function setImage(trainer, poke) {
@@ -75,7 +75,7 @@ function setHealth(trainer, poke) {
 
 function setMoves(trainer, poke) {
     for(var i = 0; i < 3; i += 1) {
-        var $move = $('<li>').text(poke.moves[i].name).css("background", poke.moves[i].color);
+        var $move = $('<li>').text(poke.moves[i].name).css("background", poke.moves[i].color).addClass('attack');
         $($move).prop('move', poke.moves[i]);
         var $pp = $('<span>').text('PP: ' + poke.moves[i].currentPP + '/' + poke.moves[i].pp);
         $($move).append($pp);
@@ -148,18 +148,33 @@ function switchPokemon(trainer, poke) {
     currentPokemon = poke;
 }
 
-function setPokeballs() {
-    for (var i = 0; i < 6; i += 1) {
+function setPokeballs(trainer, array) {
+    for (var i = 0; i < array.length; i += 1) {
         var $ball = $('<li>').addClass('ball').html('<img src="https://s-media-cache-ak0.pinimg.com/236x/93/d9/10/93d910850bf76debe69a0ad7a5a76141--art-students-performing-arts.jpg">');
-        $('.pokeballs').append($ball);
+        $($ball).prop('pokemon', array[i]);
+        $($ball).prop('trainer', trainer)
+        var $list = $('.pokeballs');
+        $($list[trainer.player]).append($ball);
     }
 }
-setPokeballs()
+
+//initial pokeball setup
+
+setPokeballs(Red, redArray);
+setPokeballs(Blue, blueArray);
+
+//on click to change pokemon
+
+$('body').on('click', '.ball', function() {
+    console.log(this.pokemon)
+    console.log(this.trainer)
+    switchPokemon(this.trainer, this.pokemon)
+})
 
 
 // attack function
 
-$('body').on('click', 'li', function() {
+$('body').on('click', '.attack', function() {
     enemyPokemon.currentHP -= this.move.damage;
     this.move.currentPP -= 1;
     $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
