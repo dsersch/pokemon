@@ -53,7 +53,7 @@ var blueArray = [Blue.geodude, Blue.pickacu]
 // info functions
 
 function setImage(trainer, poke) {
-    var $imgs = $('img');
+    var $imgs = $('.poke-img');
     if(trainer.player === 0) {
         $imgs[trainer.player].setAttribute('src', poke.back);
     } else {
