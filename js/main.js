@@ -1,20 +1,21 @@
 console.log("loaded...")
 // move constructor
-function Move(name, damage, pp, type, color){
+function Move(name, damage, pp, currentPP, type, color){
     this.name = name;
     this.damage = damage;
     this.pp = pp;
+    this.currentPP = currentPP
     this.type = type;
     this.color = color;
 }
 // test moves
 
-var thunderbolt = new Move('thunderbolt', 30, 25, 'electric', 'yellow');
-var slap = new Move('slap', 15, 40, 'nornmal', 'silver')
-var shock = new Move('shock', 50, 5, 'electric', 'yellow')
-var pound = new Move('pound', 15, 40, 'normal', 'silver')
-var rockThrow = new Move('rock throw', 30, 25, 'rock', 'slategray')
-var smash = new Move('smash', 50, 5, 'rock', 'slategray')
+var thunderbolt = new Move('thunderbolt', 30, 25, 25, 'electric', 'yellow');
+var slap = new Move('slap', 15, 40, 40, 'nornmal', 'silver')
+var shock = new Move('shock', 50, 5, 5, 'electric', 'yellow')
+var pound = new Move('pound', 15, 40, 40, 'normal', 'silver')
+var rockThrow = new Move('rock throw', 30, 25, 25, 'rock', 'slategray')
+var smash = new Move('smash', 50, 5, 5, 'rock', 'slategray')
 
 // pokemon constructor
 
@@ -30,7 +31,6 @@ function Pokemon(name, HP, currentHP, speed, type, move1, move2, move3, front, b
 }
 
 // test trainer objects
-
 
 Red = {
     player: 0,
@@ -50,12 +50,6 @@ Blue = {
     'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif')
 }
 
-
-// set current pokemon for each trainer
-
-var player1 = Red.pickacu;
-var player2 = Blue.geodude;
-
 // info functions
 
 function setImage(trainer, poke) {
@@ -72,7 +66,7 @@ function setName(trainer, poke) {
     $($names[trainer.player]).text(poke.name)
 }
 
-function setHealt(trainer, poke) {
+function setHealth(trainer, poke) {
     var maxHealth = poke.HP;
     var currentHealth = poke.currentHP;
     var $health = $('.health');
@@ -81,7 +75,8 @@ function setHealt(trainer, poke) {
 
 function setMoves(trainer, poke) {
     for(var i = 0; i < 3; i += 1) {
-        var $move = $('<li>').text(poke.moves[i].name).css("background", poke.moves[i].color);
+        var $move = $('<li>').text(poke.moves[i].name + ' PP: ' + poke.moves[i].currentPP + '/' + poke.moves[i].pp).css("background", poke.moves[i].color);
+        $($move).prop('move', poke.moves[i]);
         var $movesLists = $('ul');
         $($movesLists[trainer.player]).append($move);
     }
@@ -89,7 +84,7 @@ function setMoves(trainer, poke) {
 
 function setPlayerInfo(trainer, poke) {
     setImage(trainer, poke);
-    setHealt(trainer, poke);
+    setHealth(trainer, poke);
     setMoves(trainer, poke);
     setName(trainer, poke);
 }
@@ -97,3 +92,17 @@ function setPlayerInfo(trainer, poke) {
 setPlayerInfo(Red, Red.pickacu);
 setPlayerInfo(Blue, Blue.geodude);
 
+//test player set up
+
+var currentPlayer = Red;
+var enemy = Blue;
+var currentPokemon = Red.pickacu;
+var enemyPokemon = Blue.geodude;
+// attack function
+
+$('li').on('click', function() {
+    enemyPokemon.currentHP -= this.move.damage;
+    console.log(enemyPokemon.currentHP)
+    setHealth(enemy, enemyPokemon)
+
+})
