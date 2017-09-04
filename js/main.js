@@ -37,7 +37,7 @@ Red = {
     pickacu: new Pokemon('PICACHU', 150, 150, 9, 'electric', thunderbolt, shock, slap, 
     'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif'),
 
-    geodude: new Pokemon('GEODUDE', 200, 200, 'rock', pound, rockThrow, smash,
+    geodude: new Pokemon('GEODUDE', 200, 200, 3, 'rock', pound, rockThrow, smash,
     'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif')
     
 }
@@ -79,7 +79,7 @@ function setMoves(trainer, poke) {
         $($move).prop('move', poke.moves[i]);
         var $pp = $('<span>').text('PP: ' + poke.moves[i].currentPP + '/' + poke.moves[i].pp);
         $($move).append($pp);
-        var $movesLists = $('ul');
+        var $movesLists = $('.moves');
         $($movesLists[trainer.player]).append($move);
     }
 }
@@ -100,7 +100,7 @@ var currentPlayer = Red;
 var enemy = Blue;
 var currentPokemon = Red.pickacu;
 var enemyPokemon = Blue.geodude;
-var $start = $('ul');
+var $start = $('.moves');
 $($start[1]).css('display', 'none');
 
 //swith turns function
@@ -113,7 +113,7 @@ function switchTurns() {
         currentPokemon = enemyPokemon;
         enemy = lastPlayer;
         enemyPokemon = lastPoke;
-        var $movelist = $('ul');
+        var $movelist = $('.moves');
         $($movelist[0]).slideToggle(400, function() {
             $($movelist[1]).slideToggle(400);
         });
@@ -124,16 +124,35 @@ function switchTurns() {
         currentPokemon = enemyPokemon;
         enemy = lastPlayer;
         enemyPokemon = lastPoke;
-        var $movelist = $('ul');
+        var $movelist = $('.moves');
         $($movelist[1]).slideToggle(400, function() {
             $($movelist[0]).slideToggle(400);
         });
     }
 }
 
+// swith pokemon function
+
+function switchMoves(trainer, poke) {
+    var $moves = $('.moves');
+    var oldMoves = $moves[trainer.player];
+    $(oldMoves).children().remove();
+    setMoves(trainer, poke);
+}
+
+function switchPokemon(trainer, poke) {
+    setImage(trainer, poke);
+    setHealth(trainer, poke);
+    setName(trainer, poke);
+    switchMoves(trainer, poke);
+    currentPokemon = poke;
+}
+
+
+
 // attack function
 
-$('li').on('click', function() {
+$('body').on('click', 'li', function() {
     enemyPokemon.currentHP -= this.move.damage;
     this.move.currentPP -= 1;
     $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
