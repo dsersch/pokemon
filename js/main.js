@@ -75,8 +75,10 @@ function setHealth(trainer, poke) {
 
 function setMoves(trainer, poke) {
     for(var i = 0; i < 3; i += 1) {
-        var $move = $('<li>').text(poke.moves[i].name + ' PP: ' + poke.moves[i].currentPP + '/' + poke.moves[i].pp).css("background", poke.moves[i].color);
+        var $move = $('<li>').text(poke.moves[i].name).css("background", poke.moves[i].color);
         $($move).prop('move', poke.moves[i]);
+        var $pp = $('<span>').text('PP: ' + poke.moves[i].currentPP + '/' + poke.moves[i].pp);
+        $($move).append($pp);
         var $movesLists = $('ul');
         $($movesLists[trainer.player]).append($move);
     }
@@ -98,11 +100,14 @@ var currentPlayer = Red;
 var enemy = Blue;
 var currentPokemon = Red.pickacu;
 var enemyPokemon = Blue.geodude;
+
 // attack function
 
 $('li').on('click', function() {
     enemyPokemon.currentHP -= this.move.damage;
-    console.log(enemyPokemon.currentHP)
-    setHealth(enemy, enemyPokemon)
-
+    this.move.currentPP -= 1;
+    $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
+    //console.log(this.move.currentPP);
+    //console.log(enemyPokemon.currentHP);
+    setHealth(enemy, enemyPokemon);
 })

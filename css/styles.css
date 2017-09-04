@@ -25,7 +25,7 @@ h3 {
     list-style-type: none;
     padding-left: 0px;
     margin-top: 0px;
-    text-align: center;
+    text-align: left;
 }
 li {
     height: 30px;
@@ -33,4 +33,7 @@ li {
     border-radius: 4px;
     margin-top: 2px;
     font-size: 24px;
+}
+span {
+    float: right;
 }
