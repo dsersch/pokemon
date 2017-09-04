@@ -50,7 +50,10 @@ Blue = {
     'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif')
 }
 var blueArray = [Blue.geodude, Blue.pickacu]
+
 // info functions
+
+// sets pokemon image
 
 function setImage(trainer, poke) {
     var $imgs = $('.poke-img');
@@ -61,10 +64,14 @@ function setImage(trainer, poke) {
     }
 }
 
+// sets name field
+
 function setName(trainer, poke) {
     var $names = $('.name');
     $($names[trainer.player]).text(poke.name)
 }
+
+// sets health points
 
 function setHealth(trainer, poke) {
     var maxHealth = poke.HP;
@@ -72,6 +79,8 @@ function setHealth(trainer, poke) {
     var $health = $('.health');
     $($health[trainer.player]).text('HP: ' + currentHealth + '/' + maxHealth)
 }
+
+// creates move buttons and attaches moves to them
 
 function setMoves(trainer, poke) {
     for(var i = 0; i < 3; i += 1) {
@@ -83,6 +92,8 @@ function setMoves(trainer, poke) {
         $($movesLists[trainer.player]).append($move);
     }
 }
+
+// combination of all the info functions
 
 function setPlayerInfo(trainer, poke) {
     setImage(trainer, poke);
@@ -148,6 +159,8 @@ function switchPokemon(trainer, poke) {
     currentPokemon = poke;
 }
 
+// create pokeball buttons and attach pokemon to them
+
 function setPokeballs(trainer, array) {
     for (var i = 0; i < array.length; i += 1) {
         var $ball = $('<li>').addClass('ball').html('<img src="https://s-media-cache-ak0.pinimg.com/236x/93/d9/10/93d910850bf76debe69a0ad7a5a76141--art-students-performing-arts.jpg">');
@@ -172,7 +185,23 @@ $('body').on('click', '.ball', function() {
         alert("Not Your Turn")
     }
 })
+// remove ko'd pokemon
+function clearMoves() {
+    var $moves = $('.moves');
+    var oldMoves = $moves[enemy.player];
+    $(oldMoves).children().remove();
+}
 
+function removepokemon() {
+    var $lists = $('.pokeballs');
+    var $poke = $($lists[enemy.player]).children();
+	for (var i = 0; i < $poke.length; i += 1) {
+		if ($poke[i].pokemon === enemyPokemon) {
+            $($poke[i]).remove();
+            clearMoves();
+        }
+    }
+}
 
 // attack function
 
@@ -180,8 +209,13 @@ $('body').on('click', '.attack', function() {
     enemyPokemon.currentHP -= this.move.damage;
     this.move.currentPP -= 1;
     $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
-    //console.log(this.move.currentPP);
-    //console.log(enemyPokemon.currentHP);
+    //damage alert
+    //alert(currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + this.move.damage + ' damage.')
     setHealth(enemy, enemyPokemon);
+    // ko check
+    if (enemyPokemon.currentHP <= 0) {
+        alert(enemyPokemon.name + ' has been knocked out! Choose another PokeMon')
+        removepokemon();
+    }
     switchTurns();
 })
