@@ -1,10 +1,11 @@
 console.log("loaded...")
 // move constructor
-function Move(name, damage, pp, currentPP, type, color){
+function Move(name, damage, pp, currentPP, accuracy, type, color){
     this.name = name;
     this.damage = damage;
     this.pp = pp;
     this.currentPP = currentPP
+    this.accuracy = accuracy;
     this.type = type;
     this.color = color;
 }
@@ -29,35 +30,48 @@ Red = {
     name: 'Red',
     koCount: 0,
     pickacu: new Pokemon('PICACHU', 150, 150, 9, 'electric',
-    new Move('thunderbolt', 30, 25, 25, 'electric', 'yellow'),
-    new Move('shock', 50, 5, 5, 'electric', 'yellow'),
-    new Move('slap', 15, 40, 40, 'nornmal', 'silver'),
+    new Move('thunderbolt', 30, 25, 25, 8,'electric', 'yellow'),
+    new Move('shock', 50, 5, 5, 7,'electric', 'yellow'),
+    new Move('slap', 15, 40, 40, 9,'nornmal', 'silver'),
     'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif'),
 
     geodude: new Pokemon('GEODUDE', 200, 200, 3, 'rock',
-    new Move('pound', 15, 40, 40, 'normal', 'silver'),
-    new Move('rock throw', 30, 25, 25, 'rock', 'slategray'),
-    new Move('smash', 50, 5, 5, 'rock', 'slategray'),
-    'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif')
+    new Move('pound', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('rock throw', 30, 25, 25, 8, 'rock', 'slategray'),
+    new Move('smash', 50, 5, 5, 7, 'rock', 'slategray'),
+    'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif'),
+
+    charizard: new Pokemon('CHARIZARD', 250, 250, 5, 'fire', 
+    new Move('punch', 15, 40, 40, 9,'normal', 'silver'),
+    new Move('ember', 30, 25, 25, 8, 'fire', 'tomato'),
+    new Move('fire blast', 50, 5, 5, 7, 'fire', 'tomato'),
+    'http://www.pokestadium.com/sprites/xy/charizard.gif', 'http://www.pokestadium.com/sprites/xy/back/charizard.gif')
 }
-var redArray = [Red.pickacu, Red.geodude]
+var redArray = [Red.pickacu, Red.geodude, Red.charizard]
 Blue = {
     player: 1,
     name: 'Blue',
     koCount: 0,
     geodude: new Pokemon('GEODUDE', 200, 200, 3, 'rock',
-    new Move('pound', 15, 40, 40, 'normal', 'silver'),
-    new Move('rock throw', 30, 25, 25, 'rock', 'slategray'),
-    new Move('smash', 50, 5, 5, 'rock', 'slategray'),
+    new Move('pound', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('rock throw', 30, 25, 25, 8, 'rock', 'slategray'),
+    new Move('smash', 50, 5, 5, 7, 'rock', 'slategray'),
     'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif'),
 
     pickacu: new Pokemon('PICACHU', 150, 150, 9, 'electric',
-    new Move('thunderbolt', 30, 25, 25, 'electric', 'yellow'),
-    new Move('shock', 50, 5, 5, 'electric', 'yellow'),
-    new Move('slap', 15, 40, 40, 'nornmal', 'silver'), 
-    'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif')
+    new Move('thunderbolt', 30, 25, 25, 8, 'electric', 'yellow'),
+    new Move('shock', 50, 5, 5, 7, 'electric', 'yellow'),
+    new Move('slap', 15, 40, 40, 9, 'nornmal', 'silver'), 
+    'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif'),
+
+    blastoise: new Pokemon('BLASTOISE', 300, 300, 4, 'water',
+    new Move('drop kick', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('water gun', 30, 25, 25, 8, 'water', 'dodgerblue'),
+    new Move('hydro pump', 50, 5, 5, 7, 'water', 'dodgerblue'),
+    'http://www.pokestadium.com/sprites/xy/blastoise.gif', 'http://www.pokestadium.com/sprites/xy/back/blastoise.gif')
+
 }
-var blueArray = [Blue.geodude, Blue.pickacu]
+var blueArray = [Blue.geodude, Blue.pickacu, Blue.blastoise]
 
 // info functions
 
@@ -193,6 +207,22 @@ $('body').on('click', '.ball', function() {
         alert("Not Your Turn")
     }
 })
+
+// show pokemon in ball
+
+// $('.ball').hover( function() {
+//         $(this).html('<img src="' + this.pokemon.front + '">')
+//     }, function() {  
+//         $(this).html('<img src="https://s-media-cache-ak0.pinimg.com/236x/93/d9/10/93d910850bf76debe69a0ad7a5a76141--art-students-performing-arts.jpg">')
+//     })
+// $('body').on('mouseenter', '.ball', function() {
+//     $(this).html('<img src="' + this.pokemon.front + '">')
+// })
+// $('body').on('mouseleave', '.ball', function() {  
+//         $(this).html('<img src="' + this.pokemon.back + '">')
+// })
+
+
 // remove ko'd pokemon
 
 function clearMoves() {
@@ -212,28 +242,48 @@ function removepokemon() {
     }
 }
 
+// display div
+
+function display(text) {
+    $('.display').text(text);
+}
+// type check
+
+// accuracy check
+
+
 // attack function
 
 $('body').on('click', '.attack', function() {
-    if (this.move.currentPP === 0) {
-        alert("Out of Power Points. Select another attack.")
+    // var acc = Math.floor(Math.random() *10)
+    // console.log(acc)
+    if (Math.floor(Math.random() *10) < this.move.accuracy) {
+        if (this.move.currentPP === 0) {
+            display("Out of Power Points. Select another attack.")
+        } else {
+            enemyPokemon.currentHP -= this.move.damage;
+            this.move.currentPP -= 1;
+            $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
+            //damage alert
+            display(currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + this.move.damage + ' damage.')
+            setHealth(enemy, enemyPokemon);
+            // ko check
+            if (enemyPokemon.currentHP <= 0) {
+                display(enemyPokemon.name + ' has been knocked out! Choose another PokeMon')
+                enemy.koCount += 1;
+                removepokemon();
+            }
+            if (enemy.koCount === 3) {
+                alert(currentPlayer.name + ' Wins!');
+                display(currentPlayer.name + 'Wins!');
+            } else {
+                switchTurns();
+            }
+        }
     } else {
-        enemyPokemon.currentHP -= this.move.damage;
+        display("The attack missed!");
         this.move.currentPP -= 1;
         $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
-        //damage alert
-        //alert(currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + this.move.damage + ' damage.')
-        setHealth(enemy, enemyPokemon);
-        // ko check
-        if (enemyPokemon.currentHP <= 0) {
-            alert(enemyPokemon.name + ' has been knocked out!')
-            enemy.koCount += 1;
-            removepokemon();
-        }
-        if (enemy.koCount === 2) {
-            alert(currentPlayer.name + ' Wins!')
-        } else {
-            switchTurns();
-        }
-    }
+        switchTurns();
+    } 
 })
