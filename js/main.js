@@ -1,4 +1,6 @@
 console.log("loaded...")
+// last attack in display
+var lastAttack = '';
 // move constructor
 function Move(name, damage, pp, currentPP, accuracy, type, color){
     this.name = name;
@@ -109,9 +111,7 @@ function setMoves(trainer, poke) {
         var $move = $('<li>').text(poke.moves[i].name).css("background", poke.moves[i].color).addClass('attack');
         $($move).prop('move', poke.moves[i]);
         var $pp = $('<span>').text('PP: ' + poke.moves[i].currentPP + '/' + poke.moves[i].pp);
-        var $damage = $('<p>').addClass('stats').text('Damage: ' + poke.moves[i].damage);
-        var $accuracy = $('<p>').addClass('stats').text('Accuracy: ' + (poke.moves[i].accuracy * 10) + '%');
-        $($move).append($pp, $damage, $accuracy);
+        $($move).append($pp);
         var $movesLists = $('.moves');
         $($movesLists[trainer.player]).append($move);
     }
@@ -212,11 +212,11 @@ $('body').on('click', '.ball', function() {
 
 // show pokemon in ball
 
-// $('.ball').hover( function() {
-//         $(this).html('<img src="' + this.pokemon.front + '">')
-//     }, function() {  
-//         $(this).html('<img src="https://s-media-cache-ak0.pinimg.com/236x/93/d9/10/93d910850bf76debe69a0ad7a5a76141--art-students-performing-arts.jpg">')
-//     })
+$('.ball').hover(function() {
+    display(this.pokemon.name);
+}, function() {
+    display(lastAttack);
+})
 // $('body').on('mouseenter', '.ball', function() {
 //     $(this).html('<img src="' + this.pokemon.front + '">')
 // })
@@ -247,18 +247,16 @@ function removepokemon() {
 // display div
 
 function display(text) {
-    $('.display').text(text);
+    $('.display').html(text);
 }
 
 // move check
 
-$('body').on('hover', '.attack', function() {
-    var children = $(this).children();
-    var d = children[1];
-    var a = children[2];
-    
+$('.attack').hover(function() {
+    display(this.move.name + '<br>' + 'Damage: ' + this.move.damage + '<br>' + 'Accuracy: ' + this.move.accuracy)
+}, function() {
+    display(lastAttack)
 })
-
 
 // attack function
 
@@ -274,6 +272,7 @@ $('body').on('click', '.attack', function() {
             $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
             //damage alert
             display(currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + this.move.damage + ' damage.')
+            lastAttack = currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + this.move.damage + ' damage.'
             setHealth(enemy, enemyPokemon);
             // ko check
             if (enemyPokemon.currentHP <= 0) {

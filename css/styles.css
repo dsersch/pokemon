@@ -69,21 +69,11 @@ li img {
 }
 
 .display {
-    height: 50px;
+    height: 55px;
     width: 40%;
     margin: 0 auto;
     margin-top: 5px;
     border: 2px solid black;
     border-radius: 4px;
     text-align: center;
-}
-
-li:hover {
-    height: 100px;
-}
-p {
-    font-size: 16px;
-}
-.stats {
-    display: none;
 }
