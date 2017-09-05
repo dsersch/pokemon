@@ -109,7 +109,9 @@ function setMoves(trainer, poke) {
         var $move = $('<li>').text(poke.moves[i].name).css("background", poke.moves[i].color).addClass('attack');
         $($move).prop('move', poke.moves[i]);
         var $pp = $('<span>').text('PP: ' + poke.moves[i].currentPP + '/' + poke.moves[i].pp);
-        $($move).append($pp);
+        var $damage = $('<p>').addClass('stats').text('Damage: ' + poke.moves[i].damage);
+        var $accuracy = $('<p>').addClass('stats').text('Accuracy: ' + (poke.moves[i].accuracy * 10) + '%');
+        $($move).append($pp, $damage, $accuracy);
         var $movesLists = $('.moves');
         $($movesLists[trainer.player]).append($move);
     }
@@ -247,9 +249,15 @@ function removepokemon() {
 function display(text) {
     $('.display').text(text);
 }
-// type check
 
-// accuracy check
+// move check
+
+$('body').on('hover', '.attack', function() {
+    var children = $(this).children();
+    var d = children[1];
+    var a = children[2];
+    
+})
 
 
 // attack function
