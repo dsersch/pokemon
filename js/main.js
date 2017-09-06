@@ -262,9 +262,11 @@ function display(text) {
 
 // move check
 
-$('.attack').hover(function() {
+$('.moves').on('mouseenter', '.attack', function() {
     display(this.move.name + '<br>' + 'Damage: ' + this.move.damage + '<br>' + 'Accuracy: ' + this.move.accuracy)
-}, function() {
+    // display(lastAttack)
+})
+$('.moves').on('mouseleave', '.attack', function() {
     display(lastAttack)
 })
 
