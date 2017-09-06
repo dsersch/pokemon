@@ -9,16 +9,16 @@ function Type(name, strong1, strong2, weak1, weak2){
     this.weak = [weak1, weak2]
 }
 
-var electric = new Type('electric', 'water', 'flying', 'ground', 'none');
-var water = new Type('water', 'fire', 'rock', 'electric', 'grass')
+var electric = new Type('electric', 'water', 'flying', 'ground', 'rock');
+var water = new Type('water', 'fire', 'rock', 'grass', 'electric')
 var fire = new Type('fire', 'grass', 'bug', 'water', 'ground')
-var grass = new Type('grass', 'water', 'ground', 'fire', 'flying')
-var ground = new Type('ground', 'electric', 'fire', 'water', 'grass')
-var rock = new Type('rock', 'fire', 'electric', 'water', 'grass')
+var ground = new Type('ground', 'electric', 'fire', 'grass', 'water')
+var rock = new Type('rock', 'electric', 'grass', 'water', 'grass')
 var flying = new Type('flying', 'grass', 'bug', 'electric', 'rock')
 var bug = new Type('bug', 'grass', 'psychic', 'fire', 'rock')
-
+var grass = new Type('grass', 'water', 'ground', 'fire', 'rock')
 // move constructor
+
 function Move(name, damage, pp, currentPP, accuracy, type, color){
     this.name = name;
     this.damage = damage;
@@ -42,55 +42,91 @@ function Pokemon(name, HP, currentHP, speed, type, move1, move2, move3, front, b
     this.back =back;
 }
 
+
 // trainer objects
 
 Red = {
     player: 0,
     name: 'Red',
     koCount: 0,
-    pickacu: new Pokemon('PICACHU', 150, 150, 9, electric,
-    new Move('thunderbolt', 30, 25, 25, 8, electric, 'yellow'),
-    new Move('shock', 50, 5, 5, 7, electric, 'yellow'),
-    new Move('slap', 15, 40, 40, 9,'nornmal', 'silver'),
-    'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif'),
+    pickachu: new Pokemon('PICACHU', 150, 150, 9, electric,
+    new Move('SLAP', 15, 40, 40, 9,'normal', 'silver'),
+    new Move('SHOCK', 50, 5, 5, 7, electric, 'yellow'),
+    new Move('THUNDERBOLT', 30, 25, 25, 8, electric, 'yellow'),
+    'http://www.pokestadium.com/sprites/black-white/animated/pikachu.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/pikachu.gif'),
 
-    geodude: new Pokemon('GEODUDE', 200, 200, 3, rock,
-    new Move('pound', 15, 40, 40, 9, 'normal', 'silver'),
-    new Move('rock throw', 30, 25, 25, 8, rock, 'slategray'),
-    new Move('smash', 50, 5, 5, 7, rock, 'slategray'),
-    'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif'),
+    blastoise: new Pokemon('BLASTOISE', 300, 300, 4, water,
+    new Move('HEAD BUTT', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('WATER GUN', 30, 25, 25, 8, water, 'dodgerblue'),
+    new Move('HYDRO PUMP', 50, 5, 5, 7, water, 'dodgerblue'),
+    'http://www.pokestadium.com/sprites/black-white/animated/blastoise.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/blastoise.gif'),
 
     charizard: new Pokemon('CHARIZARD', 250, 250, 5, fire, 
-    new Move('punch', 15, 40, 40, 9,'normal', 'silver'),
-    new Move('ember', 30, 25, 25, 8, fire, 'tomato'),
-    new Move('fire blast', 50, 5, 5, 7, fire, 'tomato'),
-    'http://www.pokestadium.com/sprites/xy/charizard.gif', 'http://www.pokestadium.com/sprites/xy/back/charizard.gif')
+    new Move('PUNCH', 15, 40, 40, 9,'normal', 'silver'),
+    new Move('EMBER', 30, 25, 25, 8, fire, 'tomato'),
+    new Move('FIRE BLAST', 50, 5, 5, 7, fire, 'tomato'),
+    'http://www.pokestadium.com/sprites/black-white/animated/charizard.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/charizard.gif'),
+
+    venusaur: new Pokemon('VENUSAUR', 275, 275, 4, grass,
+    new Move('SCRATCH', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('RAZOR LEAF', 30, 25, 25, 8, grass, 'lightgreen'),
+    new Move('SOLAR BEAM', 50, 5, 5, 7, grass, 'lightgreen'),
+    'http://www.pokestadium.com/sprites/black-white/animated/venusaur-female.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/venusaur-female.gif'),
+
+    sandslash: new Pokemon('SANDSLASH', 200, 200, 6, ground,
+    new Move('SLASH', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('DRILL RUN', 30, 25, 25, 8, ground, 'tan'),
+    new Move('MAGNITUDE', 50, 5, 5, 7, ground, 'tan'),
+    'http://www.pokestadium.com/sprites/black-white/animated/sandslash.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/sandslash.gif'),
+
+    onix: new Pokemon('ONIX', 400, 400, 2, rock,
+    new Move("POUND", 15, 40, 40, 9, 'normal', 'silver'),
+    new Move("ROCK THROW", 30, 25, 25, 8, rock, 'slategray'),
+    new Move("STONE EDGE", 50, 5, 5, 7, rock, 'slategray'),
+    'http://www.pokestadium.com/sprites/black-white/animated/onix.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/onix.gif')
 }
-var redArray = [Red.pickacu, Red.geodude, Red.charizard]
+var redArray = [Red.pickachu, Red.charizard, Red.blastoise, Red.venusaur, Red.sandslash, Red.onix]
 Blue = {
     player: 1,
     name: 'Blue',
     koCount: 0,
-    geodude: new Pokemon('GEODUDE', 200, 200, 3, rock,
-    new Move('pound', 15, 40, 40, 9, 'normal', 'silver'),
-    new Move('rock throw', 30, 25, 25, 8, rock, 'slategray'),
-    new Move('smash', 50, 5, 5, 7, rock, 'slategray'),
-    'http://www.pokestadium.com/sprites/xy/geodude.gif', 'http://www.pokestadium.com/sprites/xy/back/geodude.gif'),
+    marowak: new Pokemon('MAROWAK', 225, 225, 5, ground,
+    new Move('KARATE CHOP', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('BONE CLUB', 30, 25, 25, 8, ground, 'tan'),
+    new Move('BULLDOZE', 50, 5, 5, 7, ground, 'tan'),
+    'http://www.pokestadium.com/sprites/black-white/animated/marowak.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/marowak.gif'),
 
-    pickacu: new Pokemon('PICACHU', 150, 150, 9, electric,
-    new Move('thunderbolt', 30, 25, 25, 8, electric, 'yellow'),
-    new Move('shock', 50, 5, 5, 7, electric, 'yellow'),
-    new Move('slap', 15, 40, 40, 9, 'nornmal', 'silver'), 
-    'http://www.pokestadium.com/sprites/xy/pikachu-female.gif', 'http://www.pokestadium.com/sprites/xy/back/pikachu.gif'),
+    gyarados: new Pokemon('GYARADOS', 250, 250, 7, water,
+    new Move('ROAR', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('AQUA JET', 30, 25, 25, 8, water, 'dodgerblue'),
+    new Move('WATERFALL', 50, 5, 5, 7, water, 'dodgerblue'),
+    'http://www.pokestadium.com/sprites/black-white/animated/gyarados.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/gyarados.gif'),
 
-    blastoise: new Pokemon('BLASTOISE', 300, 300, 4, water,
-    new Move('drop kick', 15, 40, 40, 9, 'normal', 'silver'),
-    new Move('water gun', 30, 25, 25, 8, water, 'dodgerblue'),
-    new Move('hydro pump', 50, 5, 5, 7, water, 'dodgerblue'),
-    'http://www.pokestadium.com/sprites/xy/blastoise.gif', 'http://www.pokestadium.com/sprites/xy/back/blastoise.gif')
+    zapdos: new Pokemon('ZAPDOS', 175, 175, 8, electric,
+    new Move('PECK', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('BOLT STRIKE', 30, 25, 25, 8, electric, 'yellow'),
+    new Move('GIGAVOLT HAVOC', 50, 5, 5, 7, electric, 'yellow'),
+    'http://www.pokestadium.com/sprites/black-white/animated/zapdos.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/zapdos.gif'),
 
+    emboar: new Pokemon('EMBOAR', 250, 250, 4, fire,
+    new Move('DROP KICK', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('FIRE BLAST', 30, 25, 25, 8, fire, 'tomato'),
+    new Move('FLAMETHROWER', 50, 5, 5, 7, fire, 'tomato'),
+    'http://www.pokestadium.com/sprites/black-white/animated/emboar.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/emboar.gif'),
+
+    meganium: new Pokemon('MEGANIUM', 300, 300, 3, grass,
+    new Move('TAIL WHIP', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('LEAF BLADE', 30, 25, 25, 8, grass, 'lightgreen'),
+    new Move('BLOOM DOOM', 50, 5, 5, 7, grass, 'lightgreen'),
+    'http://www.pokestadium.com/sprites/black-white/animated/meganium.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/meganium.gif'),
+
+    golem: new Pokemon('GOLEM', 375, 375, 3, rock,
+    new Move('POUND', 15, 40, 40, 9, 'normal', 'silver'),
+    new Move('ROLLOUT', 30, 25, 25, 8, rock, 'slategray'),
+    new Move('DIAMOND STORM', 50, 5, 5, 7, rock, 'slategray'),
+    'http://www.pokestadium.com/sprites/black-white/animated/golem.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/golem.gif')
 }
-var blueArray = [Blue.geodude, Blue.pickacu, Blue.blastoise]
+var blueArray = [Blue.marowak, Blue.gyarados, Blue.zapdos, Blue.emboar, Blue.meganium, Blue.golem]
 
 // info functions
 
@@ -143,15 +179,15 @@ function setPlayerInfo(trainer, poke) {
     setName(trainer, poke);
 }
 
-setPlayerInfo(Red, Red.pickacu);
-setPlayerInfo(Blue, Blue.geodude);
+setPlayerInfo(Red, Red.pickachu);
+setPlayerInfo(Blue, Blue.marowak);
 
 //test player set up
 
 var currentPlayer = Red;
 var enemy = Blue;
-var currentPokemon = Red.pickacu;
-var enemyPokemon = Blue.geodude;
+var currentPokemon = Red.pickachu;
+var enemyPokemon = Blue.marowak;
 var $start = $('.moves');
 $($start[1]).css('display', 'none');
 
@@ -231,7 +267,7 @@ $('body').on('click', '.ball', function() {
 // show pokemon in ball
 
 $('.ball').hover(function() {
-    display(this.pokemon.name);
+    display('<img src="' + this.pokemon.front + '">');
 }, function() {
     display(lastAttack);
 })
@@ -308,8 +344,6 @@ function switchHealthBar() {
     $($hltBars[currentPlayer.player]).css('width', coverage +"%");
 }
 
-
-
 // attack function
 
 $('body').on('click', '.attack', function() {
@@ -325,16 +359,17 @@ $('body').on('click', '.attack', function() {
                 console.log(pokeBonus)
             }
             var moveBonus = 0
-            if (this.move.type.name === enemyPokemon.type.weak[0] || this.move.type === enemyPokemon.type.weak[1]) {
+            if (this.move.type.name === enemyPokemon.type.weak[0] || enemyPokemon.type.weak[1] === this.move.type.name) {
                 console.log('move strong against type');
                 display("It's super effective")
                 moveBonus = Math.floor(this.move.damage * .5);
                 console.log(moveBonus)
             }
             var typeReduction = 1;
-            if(this.move.type.name === enemyPokemon.type.strong[0] || this.move.type.name === enemyPokemon.type.strong[1]) {
+            if(this.move.type.name === enemyPokemon.type.strong[0] || enemyPokemon.type.strong[1] === this.move.type.name) {
                 typeReduction = .1
             }
+
             // damage the enemy
             
             var totalDamage = Math.floor((this.move.damage + pokeBonus + moveBonus) * typeReduction);
@@ -372,7 +407,7 @@ $('body').on('click', '.attack', function() {
                 enemy.koCount += 1;
                 removepokemon();
             }
-            if (enemy.koCount === 3) {
+            if (enemy.koCount === 6) {
                 alert(currentPlayer.name + ' Wins!');
                 display(currentPlayer.name + 'Wins!');
                 lastAttack = $('.display').html();

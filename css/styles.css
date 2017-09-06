@@ -83,3 +83,13 @@ li img {
     float: right;
     background: white;
 }
+#pokemon-list {
+    margin: 0 auto;
+    width: 40%;
+    list-style-type: none;
+    padding-left: 0px;
+}
+.display img {
+    height: 50px;
+    width: 50px;
+}
