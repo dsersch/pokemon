@@ -286,7 +286,7 @@ function healthBar() {
     if (coverage > 85) {
         $($hb[enemy.player]).css('background', 'red');
     }
-    $($hltBars[enemy.player]).css('width', coverage +"%");
+    $($hltBars[enemy.player]).animate({width: coverage + '%'}, 1000);
 }
 
 // health bar switch update
@@ -375,6 +375,7 @@ $('body').on('click', '.attack', function() {
             if (enemy.koCount === 3) {
                 alert(currentPlayer.name + ' Wins!');
                 display(currentPlayer.name + 'Wins!');
+                lastAttack = $('.display').html();
             } else {
                 switchTurns();
             }
