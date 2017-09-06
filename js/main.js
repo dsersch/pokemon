@@ -193,11 +193,12 @@ function switchMoves(trainer, poke) {
 }
 
 function switchPokemon(trainer, poke) {
+    currentPokemon = poke;
     setImage(trainer, poke);
     setHealth(trainer, poke);
     setName(trainer, poke);
     switchMoves(trainer, poke);
-    currentPokemon = poke;
+    switchHealthBar();   
 }
 
 // create pokeball buttons and attach pokemon to them
@@ -270,7 +271,43 @@ $('.moves').on('mouseleave', '.attack', function() {
     display(lastAttack)
 })
 
-// type check
+// health bars
+
+// health bar attack update
+
+function healthBar() {
+    var $hb = $('.healthbar');
+    var $hltBars = $('.cover');
+    var coverage = 100 - ((enemyPokemon.currentHP / enemyPokemon.HP) * 100);
+    var background = "";
+    if (coverage > 50) {
+        $($hb[enemy.player]).css('background', 'yellow');
+    }
+    if (coverage > 85) {
+        $($hb[enemy.player]).css('background', 'red');
+    }
+    $($hltBars[enemy.player]).css('width', coverage +"%");
+}
+
+// health bar switch update
+
+function switchHealthBar() {
+    var $hb = $('.healthbar');
+    var $hltBars = $('.cover');
+    var coverage = 100 - ((currentPokemon.currentHP / currentPokemon.HP) * 100);
+    var background = "";
+    if (coverage <= 50) {
+        $($hb[currentPlayer.player]).css('background', 'yellowgreen');
+    }
+    if (coverage > 50) {
+        $($hb[currentPlayer.player]).css('background', 'yellow');
+    }
+    if (coverage > 85) {
+        $($hb[currentPlayer.player]).css('background', 'red');
+    }
+    $($hltBars[currentPlayer.player]).css('width', coverage +"%");
+}
+
 
 
 // attack function
@@ -302,30 +339,36 @@ $('body').on('click', '.attack', function() {
             
             var totalDamage = Math.floor((this.move.damage + pokeBonus + moveBonus) * typeReduction);
             enemyPokemon.currentHP -= totalDamage;
+            if (enemyPokemon.currentHP < 0) {
+                enemyPokemon.currentHP = 0;
+            }
             this.move.currentPP -= 1;
             $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
+
+            // update healthbars
+
+            healthBar()
             
             //damage alert
-
+            
             if (moveBonus > 0) {
                 display(currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.' + '<br>' +
                             "It's super effective");
-                lastAttack = currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.' + '<br>' +
-                "It's super effective"
+                lastAttack = $('.display').html();
             } else if (typeReduction === .1) {
                 display(currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.' + '<br>' +
                             "It's not very effective");
-                lastAttack = currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.' + '<br>' +
-                "It's not very effective";
+                lastAttack = $('.display').html();
             } else {
                 display(currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.');
-                lastAttack = currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.';
+                lastAttack = $('.display').html();
             }
             
             setHealth(enemy, enemyPokemon);
             // ko check
             if (enemyPokemon.currentHP <= 0) {
                 display(enemyPokemon.name + ' has been knocked out! Choose another PokeMon')
+                lastAttack = $('.display').html()
                 enemy.koCount += 1;
                 removepokemon();
             }
@@ -338,7 +381,7 @@ $('body').on('click', '.attack', function() {
         }
     } else {
         display(currentPokemon.name + "'s attack missed!");
-        lastAttack = currentPokemon.name + "'s attack missed!"
+        lastAttack = $('.display').html();
         this.move.currentPP -= 1;
         $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
         switchTurns();
