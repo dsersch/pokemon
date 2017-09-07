@@ -344,6 +344,10 @@ function switchHealthBar() {
     $($hltBars[currentPlayer.player]).css('width', coverage +"%");
 }
 
+// attack animation variable
+
+var pokeToAnimate = $('.poke-img');
+
 // attack function
 
 $('body').on('click', '.attack', function() {
@@ -370,6 +374,11 @@ $('body').on('click', '.attack', function() {
                 typeReduction = .1
             }
 
+            // animate pokemon
+
+            $(pokeToAnimate[currentPlayer.player]).effect('shake', {times: 2}, 400, function() {
+                $(pokeToAnimate[currentPlayer.player]).effect('bounce', {times: 3}, 400);
+            });
             // damage the enemy
             
             var totalDamage = Math.floor((this.move.damage + pokeBonus + moveBonus) * typeReduction);
@@ -387,15 +396,18 @@ $('body').on('click', '.attack', function() {
             //damage alert
             
             if (moveBonus > 0) {
-                display(currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.' + '<br>' +
+                display(currentPokemon.name + ' used ' + this.move.name + '<br>' +
+                            ' and hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.' + '<br>' +
                             "It's super effective");
                 lastAttack = $('.display').html();
             } else if (typeReduction === .1) {
-                display(currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.' + '<br>' +
+                display(currentPokemon.name + ' used ' + this.move.name + '<br>' +
+                            ' and hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.' + '<br>' +
                             "It's not very effective");
                 lastAttack = $('.display').html();
             } else {
-                display(currentPokemon.name + ' hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.');
+                display(currentPokemon.name + ' used ' + this.move.name + '<br>' +
+                        ' and hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.');
                 lastAttack = $('.display').html();
             }
             
