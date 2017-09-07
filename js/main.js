@@ -1,6 +1,7 @@
 console.log("loaded...")
 // last attack in display
 var lastAttack = '';
+var $display = $('.display');
 
 // type constructor
 function Type(name, strong1, strong2, weak1, weak2){
@@ -42,6 +43,24 @@ function Pokemon(name, HP, currentHP, speed, type, move1, move2, move3, front, b
     this.back =back;
 }
 
+/*
+function Pokemon(props){
+    this.name = props.name;
+    this.HP = props.HP;
+    this.currentHP = props.currentHP
+    this.speed = props.speed;
+    this.type = props.type;
+    this.moves = props.moves
+    this.front = props.front;
+    this.back = props.back;
+}
+
+new Pokemon({
+    name: "Pikachu",
+    // ...,
+    // ... ,
+})
+*/
 
 // trainer objects
 
@@ -194,25 +213,19 @@ $($start[1]).css('display', 'none');
 //swith turns function
 
 function switchTurns() {
+    var lastPlayer = currentPlayer;
+    var lastPoke = currentPokemon;
+    currentPlayer = enemy;
+    currentPokemon = enemyPokemon;
+    enemy = lastPlayer;
+    enemyPokemon = lastPoke;
+    var $movelist = $('.moves');
+
     if(currentPlayer === Red) {
-        var lastPlayer = currentPlayer;
-        var lastPoke = currentPokemon;
-        currentPlayer = enemy;
-        currentPokemon = enemyPokemon;
-        enemy = lastPlayer;
-        enemyPokemon = lastPoke;
-        var $movelist = $('.moves');
         $($movelist[0]).slideToggle(400, function() {
             $($movelist[1]).slideToggle(400);
         });
     } else {
-        lastPlayer = currentPlayer;
-        lastPoke = currentPokemon;
-        currentPlayer = enemy;
-        currentPokemon = enemyPokemon;
-        enemy = lastPlayer;
-        enemyPokemon = lastPoke;
-        var $movelist = $('.moves');
         $($movelist[1]).slideToggle(400, function() {
             $($movelist[0]).slideToggle(400);
         });
@@ -241,9 +254,13 @@ function switchPokemon(trainer, poke) {
 
 function setPokeballs(trainer, array) {
     for (var i = 0; i < array.length; i += 1) {
-        var $ball = $('<li>').addClass('ball').html('<img src="img/pokeball.jpg">');
-        $($ball).prop('pokemon', array[i]);
-        $($ball).prop('trainer', trainer)
+        var $ball = $('<li>')
+        $ball
+            .addClass('ball')
+            .prop('pokemon', array[i])
+            .prop('trainer', trainer)
+            .append('<div class="default"><img src="img/pokeball.jpg"></div>')
+        $ball.append('<div class="avatar"><img src="' + $ball.prop('pokemon').front + '"></div>')
         var $list = $('.pokeballs');
         $($list[trainer.player]).append($ball);
     }
@@ -260,17 +277,17 @@ $('body').on('click', '.ball', function() {
     if (currentPlayer === this.trainer) {
         switchPokemon(this.trainer, this.pokemon)
     } else {
-        alert("Not Your Turn")
+        display("Not Your Turn");
     }
 })
 
 // show pokemon in ball
 
-$('.ball').hover(function() {
-    display('<img src="' + this.pokemon.front + '">');
-}, function() {
-    display(lastAttack);
-})
+// $('.ball').hover(function() {
+//     display('<img src="' + this.pokemon.front + '">');
+// }, function() {
+//     display(lastAttack);
+// })
 
 // remove ko'd pokemon
 
@@ -368,7 +385,16 @@ $('body').on('click', '.attack', function() {
                 console.log(pokeBonus)
             }
             var moveBonus = 0
-            if (this.move.type.name === enemyPokemon.type.weak[0] || enemyPokemon.type.weak[1] === this.move.type.name) {
+
+            var thisAttack = this
+            var enemyHasWeakness = enemyPokemon.type.weak.find(function(weakness) {
+                return thisAttack.move.type.name === weakness
+            })
+
+            console.log("Does enemy have a weakness?", !!enemyHasWeakness)
+
+
+            if (enemyHasWeakness) {
                 console.log('move strong against type');
                 display("It's super effective")
                 moveBonus = Math.floor(this.move.damage * .5);
@@ -405,30 +431,30 @@ $('body').on('click', '.attack', function() {
                 display(currentPokemon.name + ' used ' + this.move.name + '<br>' +
                             ' and hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.' + '<br>' +
                             "It's super effective");
-                lastAttack = $('.display').html();
+                lastAttack = $display.html();
             } else if (typeReduction === .1) {
                 display(currentPokemon.name + ' used ' + this.move.name + '<br>' +
                             ' and hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.' + '<br>' +
                             "It's not very effective");
-                lastAttack = $('.display').html();
+                lastAttack = $display.html();
             } else {
                 display(currentPokemon.name + ' used ' + this.move.name + '<br>' +
                         ' and hit ' + enemyPokemon.name + ' for ' + totalDamage + ' damage.');
-                lastAttack = $('.display').html();
+                lastAttack = $display.html();
             }
             
             setHealth(enemy, enemyPokemon);
             // ko check
             if (enemyPokemon.currentHP <= 0) {
                 display(enemyPokemon.name + ' has been knocked out! Choose another PokeMon')
-                lastAttack = $('.display').html()
+                lastAttack = $display.html()
                 enemy.koCount += 1;
                 removepokemon();
             }
             if (enemy.koCount === 6) {
                 alert(currentPlayer.name + ' Wins!');
                 display(currentPlayer.name + 'Wins!');
-                lastAttack = $('.display').html();
+                lastAttack = $display.html();
             } else {
                 switchTurns();
             }
@@ -436,7 +462,7 @@ $('body').on('click', '.attack', function() {
     } else {
         missSound.play();
         display(currentPokemon.name + "'s attack missed!");
-        lastAttack = $('.display').html();
+        lastAttack = $display.html();
         this.move.currentPP -= 1;
         $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
         switchTurns();

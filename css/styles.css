@@ -22,14 +22,30 @@ h1 img {
     margin: 0 auto;
     border-radius: 4px;
 }
+
+#poke-img-container1, #poke-img-container2 {
+    width:50%;
+    text-align: center;
+    height: 200px;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    text-align: center;
+}
+#poke-img-container1 {
+    float: left;
+    align-items: flex-end; /* align vertical */;
+   
+}
+#poke-img-container2 {
+    float: right;
+    align-items: flex-start; /* align vertical */;
+}
+
 #poke1 {
-    margin-left: 90px;
-    margin-top: 110px;
+    margin-bottom: 30px;
 }
 #poke2 {
-    float: right;
-    margin-right: 60px;
-    margin-top: 70px;
+    margin-top: 50px;
 }
 h3 {
     margin-bottom: 0px;
@@ -89,7 +105,34 @@ li img {
     display: inline-block;
     margin-right: 5px;
     border: none;
+    width: 35px;
+    position: relative;
 }
+
+.ball .default, .ball .avatar {
+    position: absolute;
+    top: 0;
+    transition: opacity 500ms, transform 500ms;
+}
+
+.ball .default {
+    opacity: 1;
+}
+
+.ball .avatar {
+    opacity: 0;
+    transform: scale(1) translateY(0px) rotateZ(-45deg)
+}
+
+.ball:hover .default {
+    opacity: 0;
+}
+
+.ball:hover .avatar {
+    opacity: 1;
+    transform: scale(2) translateY(-10px) rotateZ(0)
+}
+
 .card {
     margin-top: -255px;
     vertical-align: top;
