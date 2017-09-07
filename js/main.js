@@ -351,6 +351,7 @@ var pokeToAnimate = $('.poke-img');
 // hit sound effect
 
 var hitSound = new Audio('hit-sound.mp3');
+var missSound = new Audio('miss-sound.mp3')
 
 // attack function
 
@@ -433,6 +434,7 @@ $('body').on('click', '.attack', function() {
             }
         }
     } else {
+        missSound.play();
         display(currentPokemon.name + "'s attack missed!");
         lastAttack = $('.display').html();
         this.move.currentPP -= 1;
