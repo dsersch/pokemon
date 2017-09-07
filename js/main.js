@@ -16,7 +16,7 @@ var electric = new Type('electric', 'water', 'flying', 'ground', 'rock');
 var water = new Type('water', 'fire', 'rock', 'grass', 'electric')
 var fire = new Type('fire', 'grass', 'bug', 'water', 'ground')
 var ground = new Type('ground', 'electric', 'fire', 'grass', 'water')
-var rock = new Type('rock', 'electric', 'grass', 'water', 'grass')
+var rock = new Type('rock', 'electric', 'bug', 'water', 'grass')
 var flying = new Type('flying', 'grass', 'bug', 'electric', 'rock')
 var bug = new Type('bug', 'grass', 'psychic', 'fire', 'rock')
 var grass = new Type('grass', 'water', 'ground', 'fire', 'rock')
@@ -279,6 +279,7 @@ setPokeballs(Blue, blueArray);
 $('body').on('click', '.ball', function() {
     if (currentPlayer === this.trainer) {
         switchPokemon(this.trainer, this.pokemon)
+        switchTurns()
     } else {
         display("Not Your Turn");
     }
