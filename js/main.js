@@ -1,9 +1,11 @@
 console.log("loaded...")
 // last attack in display
+
 var lastAttack = '';
 var $display = $('.display');
 
 // type constructor
+
 function Type(name, strong1, strong2, weak1, weak2){
     this.name = name;
     this.strong = [strong1, strong2];
@@ -18,6 +20,7 @@ var rock = new Type('rock', 'electric', 'grass', 'water', 'grass')
 var flying = new Type('flying', 'grass', 'bug', 'electric', 'rock')
 var bug = new Type('bug', 'grass', 'psychic', 'fire', 'rock')
 var grass = new Type('grass', 'water', 'ground', 'fire', 'rock')
+
 // move constructor
 
 function Move(name, damage, pp, currentPP, accuracy, type, color){
@@ -201,7 +204,7 @@ function setPlayerInfo(trainer, poke) {
 setPlayerInfo(Red, Red.pickachu);
 setPlayerInfo(Blue, Blue.marowak);
 
-//test player set up
+//player set up
 
 var currentPlayer = Red;
 var enemy = Blue;
@@ -318,7 +321,6 @@ function display(text) {
 
 $('.moves').on('mouseenter', '.attack', function() {
     display(this.move.name + '<br>' + 'Damage: ' + this.move.damage + '<br>' + 'Accuracy: ' + this.move.accuracy + '/10')
-    // display(lastAttack)
 })
 $('.moves').on('mouseleave', '.attack', function() {
     display(lastAttack)
@@ -460,6 +462,7 @@ $('body').on('click', '.attack', function() {
             }
         }
     } else {
+        $(pokeToAnimate[currentPlayer.player]).effect('shake', {times: 2}, 400)
         missSound.play();
         display(currentPokemon.name + "'s attack missed!");
         lastAttack = $display.html();
