@@ -53,37 +53,37 @@ Red = {
     new Move('SLAP', 15, 40, 40, 9,'normal', 'silver'),
     new Move('SHOCK', 50, 5, 5, 7, electric, 'yellow'),
     new Move('THUNDERBOLT', 30, 25, 25, 8, electric, 'yellow'),
-    'http://www.pokestadium.com/sprites/black-white/animated/pikachu.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/pikachu.gif'),
+    'img/pikachu-front.gif', 'img/pikachu-back.gif'),
 
     blastoise: new Pokemon('BLASTOISE', 300, 300, 4, water,
     new Move('HEAD BUTT', 15, 40, 40, 9, 'normal', 'silver'),
     new Move('WATER GUN', 30, 25, 25, 8, water, 'dodgerblue'),
     new Move('HYDRO PUMP', 50, 5, 5, 7, water, 'dodgerblue'),
-    'http://www.pokestadium.com/sprites/black-white/animated/blastoise.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/blastoise.gif'),
+    'img/blastoise-front.gif', 'img/blastoise-back.gif'),
 
     charizard: new Pokemon('CHARIZARD', 250, 250, 5, fire, 
     new Move('PUNCH', 15, 40, 40, 9,'normal', 'silver'),
     new Move('EMBER', 30, 25, 25, 8, fire, 'tomato'),
     new Move('FIRE BLAST', 50, 5, 5, 7, fire, 'tomato'),
-    'http://www.pokestadium.com/sprites/black-white/animated/charizard.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/charizard.gif'),
+    'img/charizard-front.gif', 'img/charizard-back.gif'),
 
     venusaur: new Pokemon('VENUSAUR', 275, 275, 4, grass,
     new Move('SCRATCH', 15, 40, 40, 9, 'normal', 'silver'),
     new Move('RAZOR LEAF', 30, 25, 25, 8, grass, 'lightgreen'),
     new Move('SOLAR BEAM', 50, 5, 5, 7, grass, 'lightgreen'),
-    'http://www.pokestadium.com/sprites/black-white/animated/venusaur-female.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/venusaur-female.gif'),
+    'img/venusaur-front.gif', 'img/venusaur-back.gif'),
 
     sandslash: new Pokemon('SANDSLASH', 200, 200, 6, ground,
     new Move('SLASH', 15, 40, 40, 9, 'normal', 'silver'),
     new Move('DRILL RUN', 30, 25, 25, 8, ground, 'tan'),
     new Move('MAGNITUDE', 50, 5, 5, 7, ground, 'tan'),
-    'http://www.pokestadium.com/sprites/black-white/animated/sandslash.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/sandslash.gif'),
+    'img/sandslash-front.gif', 'img/sandslash-back.gif'),
 
     onix: new Pokemon('ONIX', 400, 400, 2, rock,
     new Move("POUND", 15, 40, 40, 9, 'normal', 'silver'),
     new Move("ROCK THROW", 30, 25, 25, 8, rock, 'slategray'),
     new Move("STONE EDGE", 50, 5, 5, 7, rock, 'slategray'),
-    'http://www.pokestadium.com/sprites/black-white/animated/onix.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/onix.gif')
+    'img/onix-front.gif', 'img/onix-back.gif')
 }
 var redArray = [Red.pickachu, Red.charizard, Red.blastoise, Red.venusaur, Red.sandslash, Red.onix]
 Blue = {
@@ -94,37 +94,37 @@ Blue = {
     new Move('KARATE CHOP', 15, 40, 40, 9, 'normal', 'silver'),
     new Move('BONE CLUB', 30, 25, 25, 8, ground, 'tan'),
     new Move('BULLDOZE', 50, 5, 5, 7, ground, 'tan'),
-    'http://www.pokestadium.com/sprites/black-white/animated/marowak.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/marowak.gif'),
+    'img/marowak-front.gif', 'img/marowak-back.gif'),
 
     gyarados: new Pokemon('GYARADOS', 250, 250, 7, water,
     new Move('ROAR', 15, 40, 40, 9, 'normal', 'silver'),
     new Move('AQUA JET', 30, 25, 25, 8, water, 'dodgerblue'),
     new Move('WATERFALL', 50, 5, 5, 7, water, 'dodgerblue'),
-    'http://www.pokestadium.com/sprites/black-white/animated/gyarados.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/gyarados.gif'),
+    'img/gyarados-front.gif', 'img/gyarados-back.gif'),
 
     zapdos: new Pokemon('ZAPDOS', 175, 175, 8, electric,
     new Move('PECK', 15, 40, 40, 9, 'normal', 'silver'),
     new Move('BOLT STRIKE', 30, 25, 25, 8, electric, 'yellow'),
     new Move('GIGAVOLT HAVOC', 50, 5, 5, 7, electric, 'yellow'),
-    'http://www.pokestadium.com/sprites/black-white/animated/zapdos.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/zapdos.gif'),
+    'img/zapdos-front.gif', 'img/zapdos-back.gif'),
 
     emboar: new Pokemon('EMBOAR', 250, 250, 4, fire,
     new Move('DROP KICK', 15, 40, 40, 9, 'normal', 'silver'),
     new Move('FIRE BLAST', 30, 25, 25, 8, fire, 'tomato'),
     new Move('FLAMETHROWER', 50, 5, 5, 7, fire, 'tomato'),
-    'http://www.pokestadium.com/sprites/black-white/animated/emboar.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/emboar.gif'),
+    'img/emboar-front.gif', 'img/emboar-back.gif'),
 
     meganium: new Pokemon('MEGANIUM', 300, 300, 3, grass,
     new Move('TAIL WHIP', 15, 40, 40, 9, 'normal', 'silver'),
     new Move('LEAF BLADE', 30, 25, 25, 8, grass, 'lightgreen'),
     new Move('BLOOM DOOM', 50, 5, 5, 7, grass, 'lightgreen'),
-    'http://www.pokestadium.com/sprites/black-white/animated/meganium.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/meganium.gif'),
+    'img/meganium-front.gif', 'img/meganium-back.gif'),
 
     golem: new Pokemon('GOLEM', 375, 375, 3, rock,
     new Move('POUND', 15, 40, 40, 9, 'normal', 'silver'),
     new Move('ROLLOUT', 30, 25, 25, 8, rock, 'slategray'),
     new Move('DIAMOND STORM', 50, 5, 5, 7, rock, 'slategray'),
-    'http://www.pokestadium.com/sprites/black-white/animated/golem.gif', 'http://www.pokestadium.com/sprites/black-white/animated/back/golem.gif')
+    'img/golem-front.gif', 'img/golem-back.gif')
 }
 var blueArray = [Blue.marowak, Blue.gyarados, Blue.zapdos, Blue.emboar, Blue.meganium, Blue.golem]
 
@@ -241,7 +241,7 @@ function switchPokemon(trainer, poke) {
 
 function setPokeballs(trainer, array) {
     for (var i = 0; i < array.length; i += 1) {
-        var $ball = $('<li>').addClass('ball').html('<img src="https://s-media-cache-ak0.pinimg.com/236x/93/d9/10/93d910850bf76debe69a0ad7a5a76141--art-students-performing-arts.jpg">');
+        var $ball = $('<li>').addClass('ball').html('<img src="img/pokeball.jpg">');
         $($ball).prop('pokemon', array[i]);
         $($ball).prop('trainer', trainer)
         var $list = $('.pokeballs');
@@ -300,7 +300,7 @@ function display(text) {
 // move check
 
 $('.moves').on('mouseenter', '.attack', function() {
-    display(this.move.name + '<br>' + 'Damage: ' + this.move.damage + '<br>' + 'Accuracy: ' + this.move.accuracy)
+    display(this.move.name + '<br>' + 'Damage: ' + this.move.damage + '<br>' + 'Accuracy: ' + this.move.accuracy + '/10')
     // display(lastAttack)
 })
 $('.moves').on('mouseleave', '.attack', function() {
