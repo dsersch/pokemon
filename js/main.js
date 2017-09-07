@@ -348,6 +348,10 @@ function switchHealthBar() {
 
 var pokeToAnimate = $('.poke-img');
 
+// hit sound effect
+
+var hitSound = new Audio('hit-sound.mp3');
+
 // attack function
 
 $('body').on('click', '.attack', function() {
@@ -378,6 +382,7 @@ $('body').on('click', '.attack', function() {
 
             $(pokeToAnimate[currentPlayer.player]).effect('shake', {times: 2}, 400, function() {
                 $(pokeToAnimate[currentPlayer.player]).effect('bounce', {times: 3}, 400);
+                hitSound.play()
             });
             // damage the enemy
             

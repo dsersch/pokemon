@@ -109,3 +109,6 @@ li img {
     height: 50px;
     width: 50px;
 }
+li:hover {
+    font-weight: bold;
+}
