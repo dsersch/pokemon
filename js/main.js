@@ -374,8 +374,9 @@ var missSound = new Audio('miss-sound.mp3')
 
 $('body').on('click', '.attack', function() {
     if (Math.floor(Math.random() *10) < this.move.accuracy) {
-        if (this.move.currentPP === 0) {
-            display("Out of Power Points. Select another attack.")
+        if (this.move.currentPP <= 0) {
+            display("Out of Power Points. Select another attack.");
+            console.log('out of pp')
         } else {
             // set damage based on type
             var pokeBonus = 0;
@@ -460,12 +461,16 @@ $('body').on('click', '.attack', function() {
             }
         }
     } else {
-        $(pokeToAnimate[currentPlayer.player]).effect('shake', {times: 2}, 400)
-        missSound.play();
-        display(currentPokemon.name + "'s attack missed!");
-        lastAttack = $display.html();
-        this.move.currentPP -= 1;
-        $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
-        switchTurns();
+        if (this.move.currentPP === 0) {
+            this.move.currentPP = 0;
+        } else {
+            this.move.currentPP -= 1;
+            $(pokeToAnimate[currentPlayer.player]).effect('shake', {times: 2}, 400)
+            missSound.play();
+            display(currentPokemon.name + "'s attack missed!");
+            lastAttack = $display.html();
+            $(this).children().text("PP: " + this.move.currentPP + '/' + this.move.pp)
+            switchTurns();
+        }    
     } 
 })
