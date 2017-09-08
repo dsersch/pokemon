@@ -12,13 +12,11 @@ function Type(name, strong1, strong2, weak1, weak2){
     this.weak = [weak1, weak2]
 }
 
-var electric = new Type('electric', 'water', 'flying', 'ground', 'rock');
-var water = new Type('water', 'fire', 'rock', 'grass', 'electric')
-var fire = new Type('fire', 'grass', 'bug', 'water', 'ground')
+var electric = new Type('electric', 'water', 'rock', 'ground', 'rock');
+var water = new Type('water', 'fire', 'ground', 'grass', 'electric')
+var fire = new Type('fire', 'grass', 'rock', 'water', 'ground')
 var ground = new Type('ground', 'electric', 'fire', 'grass', 'water')
-var rock = new Type('rock', 'electric', 'bug', 'water', 'grass')
-var flying = new Type('flying', 'grass', 'bug', 'electric', 'rock')
-var bug = new Type('bug', 'grass', 'psychic', 'fire', 'rock')
+var rock = new Type('rock', 'electric', 'fire', 'grass', 'water')
 var grass = new Type('grass', 'water', 'ground', 'fire', 'rock')
 
 // move constructor
