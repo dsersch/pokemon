@@ -279,7 +279,6 @@ setPokeballs(Blue, blueArray);
 $('body').on('click', '.ball', function() {
     if (currentPlayer === this.trainer) {
         switchPokemon(this.trainer, this.pokemon)
-        switchTurns()
     } else {
         display("Not Your Turn");
     }
